@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:pet/models/expense_category.dart';
 import 'package:sqflite/sqflite.dart';
 import '../constants/icons.dart';
 
-class DatabaseProvider {
+class DatabaseProvider extends ChangeNotifier {
   //inApp memory for holding expence category
   List<ExpenseCategory> _categories = [];
   List<ExpenseCategory> get categories => _categories;
