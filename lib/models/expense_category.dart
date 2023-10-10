@@ -32,6 +32,6 @@ class ExpenseCategory {
         title: value['title'],
         entries: value['entries'],
         totalAmount: double.parse(value['totalAmount']),
-        icon: icons[value['title']],
+        icon: icons[value['title']]!,
       );
 }
