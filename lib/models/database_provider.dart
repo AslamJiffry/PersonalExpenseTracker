@@ -132,12 +132,17 @@ class DatabaseProvider extends ChangeNotifier {
         //notify the listners
         notifyListeners();
 
+        var existingCategory = findCategory(expense.category);
         //after we insert the expense, need to update the entries and totalamount
-        var result = calculateEntriesAndTotalAmount(expense.category);
-        updateCategory(
-            expense.category, result['entries'], result['totalAmount']);
+        //var result = calculateEntriesAndTotalAmount(expense.category);
+        updateCategory(expense.category, existingCategory.entries + 1,
+            existingCategory.totalAmount + expense.amount);
       });
     });
+  }
+
+  ExpenseCategory findCategory(String title) {
+    return _categories.firstWhere((element) => element.title == title);
   }
 
   Map<String, dynamic> calculateEntriesAndTotalAmount(String category) {
