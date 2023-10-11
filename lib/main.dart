@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet/screens/expenses_screen.dart';
 import 'package:provider/provider.dart';
 import './models/database_provider.dart';
 //screens
@@ -21,6 +22,7 @@ class PersonalExpenceTracker extends StatelessWidget {
       initialRoute: HomeScreen.name,
       routes: {
         HomeScreen.name: (_) => const HomeScreen(),
+        ExpensesScreen.name: (_) => const ExpensesScreen(),
       },
     );
   }
