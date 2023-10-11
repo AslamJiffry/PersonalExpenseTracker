@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pet/models/expense.dart';
+import 'package:pet/widgets/add_expense.dart';
 import 'package:pet/widgets/home_screen/category_loader.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,7 +14,16 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: CategoryLoader(),
+      body: const CategoryLoader(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (_) => const AddExpence(),
+          );
+        },
+      ),
     );
   }
 }
