@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet/models/database_provider.dart';
+import 'package:pet/widgets/home_screen/category_list.dart';
 import 'package:provider/provider.dart';
 
 class CategoryLoader extends StatefulWidget {
@@ -34,24 +35,7 @@ class _CategoryLoaderState extends State<CategoryLoader> {
               child: Text(snapshot.error.toString()),
             );
           } else {
-            return Consumer<DatabaseProvider>(
-              builder: (_, db, __) {
-                var list = db.categories;
-
-                return ListView.builder(
-                  itemCount: list.length,
-                  itemBuilder: (_, i) => ListTile(
-                    leading: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(list[i].icon),
-                    ),
-                    title: Text(list[i].title),
-                    subtitle: Text('entries:${list[i].entries.toString()}'),
-                    trailing: Text('\$ ${list[i].totalAmount.toString()}'),
-                  ),
-                );
-              },
-            );
+            return const CategoryList();
           }
         } else {
           return const Center(
