@@ -15,6 +15,9 @@ class CategoryList extends StatelessWidget {
         var list = db.categories;
 
         return ListView.builder(
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
           itemCount: list.length,
           itemBuilder: (_, i) => CategoryCard(list[i]),
         );
