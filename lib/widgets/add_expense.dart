@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pet/constants/icons.dart';
 import 'package:pet/models/database_provider.dart';
 import 'package:pet/models/expense.dart';
@@ -64,7 +65,9 @@ class _AddExpenceState extends State<AddExpence> {
             Row(
               children: [
                 Expanded(
-                  child: Text(_date != null ? _date.toString() : 'Select Date'),
+                  child: Text(_date != null
+                      ? DateFormat("MMMM dd,yyyy").format(_date!)
+                      : 'Select Date'),
                 ),
                 IconButton(
                   onPressed: () => _selectDate(),
