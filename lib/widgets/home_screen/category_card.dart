@@ -10,7 +10,10 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        Navigator.of(context).pushNamed(ExpensesScreen.name);
+        Navigator.of(context).pushNamed(
+          ExpensesScreen.name,
+          arguments: category.title,
+        );
       },
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
