@@ -12,13 +12,17 @@ class AllExpensesList extends StatelessWidget {
     return Consumer<DatabaseProvider>(
       builder: (_, db, __) {
         var list = db.expences;
-        return ListView.builder(
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
-          itemCount: list.length,
-          itemBuilder: (_, i) => ExpenseCard(list[i]),
-        );
+        return list.isNotEmpty
+            ? ListView.builder(
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+                itemCount: list.length,
+                itemBuilder: (_, i) => ExpenseCard(list[i]),
+              )
+            : const Center(
+                child: Text('No expense data added!'),
+              );
       },
     );
   }
