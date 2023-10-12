@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:pet/constants/icons.dart';
 import 'package:pet/models/database_provider.dart';
 import 'package:pet/models/expense.dart';
-import 'package:provider/provider.dart';
+import 'package:pet/widgets/expenses_screen/confirmation_message.dart';
 
 class ExpenseCard extends StatelessWidget {
   final Expense expense;
@@ -11,14 +11,12 @@ class ExpenseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<DatabaseProvider>(
-      context,
-      listen: false,
-    );
     return Dismissible(
       key: ValueKey(expense.id),
-      onDismissed: (_) {
-        provider.deleteExpences(expense.id, expense.category, expense.amount);
+      confirmDismiss: (_) async {
+        showDialog(
+            context: context,
+            builder: (_) => ConfirmationMessage(expense: expense));
       },
       child: ListTile(
         leading: Padding(
