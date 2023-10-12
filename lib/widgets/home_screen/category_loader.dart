@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet/models/database_provider.dart';
 import 'package:pet/widgets/home_screen/category_list.dart';
+import 'package:pet/widgets/home_screen/pie_graph.dart';
 import 'package:provider/provider.dart';
 
 class CategoryLoader extends StatefulWidget {
@@ -35,7 +36,22 @@ class _CategoryLoaderState extends State<CategoryLoader> {
               child: Text(snapshot.error.toString()),
             );
           } else {
-            return const CategoryList();
+            return const Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 25,
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 250,
+                    child: PieGraph(),
+                  ),
+                  Expanded(
+                    child: CategoryList(),
+                  ),
+                ],
+              ),
+            );
           }
         } else {
           return const Center(

@@ -171,4 +171,9 @@ class DatabaseProvider extends ChangeNotifier {
       });
     });
   }
+
+  double calculateTotalExpenses() {
+    return _categories.fold(
+        0.0, (previousValue, element) => previousValue + element.totalAmount);
+  }
 }
