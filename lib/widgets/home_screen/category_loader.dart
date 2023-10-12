@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet/models/database_provider.dart';
+import 'package:pet/screens/all_expenses.dart';
 import 'package:pet/widgets/home_screen/category_list.dart';
 import 'package:pet/widgets/home_screen/pie_graph.dart';
 import 'package:provider/provider.dart';
@@ -36,17 +37,34 @@ class _CategoryLoaderState extends State<CategoryLoader> {
               child: Text(snapshot.error.toString()),
             );
           } else {
-            return const Padding(
-              padding: EdgeInsets.symmetric(
+            return Padding(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 25,
               ),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 250,
                     child: PieGraph(),
                   ),
-                  Expanded(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Expenses',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(AllExpences.name);
+                        },
+                        child: const Text('View All'),
+                      ),
+                    ],
+                  ),
+                  const Expanded(
                     child: CategoryList(),
                   ),
                 ],

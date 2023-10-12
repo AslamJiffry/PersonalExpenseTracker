@@ -204,4 +204,21 @@ class DatabaseProvider extends ChangeNotifier {
     }
     return data;
   }
+
+  Future<List<Expense>> loadAllExpenses() async {
+    final db = await database;
+    return await db.transaction((txn) async {
+      return await txn.query(expenseTable).then((data) {
+        final result = List<Map<String, dynamic>>.from(data);
+        List<Expense> list = List.generate(
+          result.length,
+          (index) => Expense.fromString(
+            result[index],
+          ),
+        );
+        _expences = list;
+        return _expences;
+      });
+    });
+  }
 }
