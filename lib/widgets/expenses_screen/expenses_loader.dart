@@ -37,7 +37,11 @@ class _ExpencesLoaderState extends State<ExpencesLoader> {
               ),
             );
           } else {
-            return const ExpencesList();
+            return const Column(
+              children: [
+                ExpencesList(),
+              ],
+            );
           }
         } else {
           return const Center(
