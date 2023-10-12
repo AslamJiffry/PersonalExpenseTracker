@@ -176,4 +176,32 @@ class DatabaseProvider extends ChangeNotifier {
     return _categories.fold(
         0.0, (previousValue, element) => previousValue + element.totalAmount);
   }
+
+  List<Map<String, dynamic>> calculateWeekExpenses() {
+    List<Map<String, dynamic>> data = [];
+
+    for (var i = 0; i < 7; i++) {
+      double total = 0.0;
+
+      //substract i from today to get previous dates
+      final weekDay = DateTime.now().subtract(
+        Duration(days: i),
+      );
+
+      for (var j = 0; j < _expences.length; j++) {
+        if (_expences[j].date.year == weekDay.year &&
+            _expences[j].date.month == weekDay.month &&
+            _expences[j].date.day == weekDay.day) {
+          //if found then add the amount to total
+          total += _expences[j].amount;
+        }
+      }
+
+      data.add({
+        'day': weekDay,
+        'amount': total,
+      });
+    }
+    return data;
+  }
 }

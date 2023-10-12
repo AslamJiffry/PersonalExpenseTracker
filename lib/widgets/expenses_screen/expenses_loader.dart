@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet/models/database_provider.dart';
+import 'package:pet/widgets/expenses_screen/expense_graph.dart';
 import 'package:pet/widgets/expenses_screen/expenses_list.dart';
 import 'package:provider/provider.dart';
 
@@ -37,10 +38,21 @@ class _ExpencesLoaderState extends State<ExpencesLoader> {
               ),
             );
           } else {
-            return const Column(
-              children: [
-                ExpencesList(),
-              ],
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 250,
+                    child: ExpenseGraph(widget.category),
+                  ),
+                  const Expanded(
+                    child: ExpencesList(),
+                  ),
+                ],
+              ),
             );
           }
         } else {
