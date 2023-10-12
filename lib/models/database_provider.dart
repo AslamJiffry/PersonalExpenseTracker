@@ -6,12 +6,27 @@ import 'package:sqflite/sqflite.dart';
 import '../constants/icons.dart';
 
 class DatabaseProvider extends ChangeNotifier {
+  String _searchText = '';
+  String get searchText => _searchText;
+
+  set searchText(String value) {
+    _searchText = value;
+    //when the search text change it will notify listners
+    notifyListeners();
+  }
+
   //inApp memory for holding expence category
   List<ExpenseCategory> _categories = [];
   List<ExpenseCategory> get categories => _categories;
 
   List<Expense> _expences = [];
-  List<Expense> get expences => _expences;
+  List<Expense> get expences {
+    return _searchText != ''
+        ? _expences
+            .where((e) => e.title.toLowerCase().contains(_searchText))
+            .toList()
+        : _expences;
+  }
 
   Database? _database;
   Future<Database> get database async {

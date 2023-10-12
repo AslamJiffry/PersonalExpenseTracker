@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet/models/database_provider.dart';
 import 'package:pet/widgets/all_expenses_screen.dart/all_expenses_list.dart';
+import 'package:pet/widgets/all_expenses_screen.dart/expenses_search.dart';
 import 'package:provider/provider.dart';
 
 class AllExpensesLoader extends StatefulWidget {
@@ -37,6 +38,7 @@ class _AllExpensesLoaderState extends State<AllExpensesLoader> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
+                    ExpensesSearch(),
                     Expanded(
                       child: AllExpensesList(),
                     ),
