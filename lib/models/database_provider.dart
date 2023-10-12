@@ -236,4 +236,22 @@ class DatabaseProvider extends ChangeNotifier {
       });
     });
   }
+
+  Future<void> deleteExpences(
+      int expenceId, String category, double amount) async {
+    final db = await database;
+    await db.transaction((txn) async {
+      await txn.delete(expenseTable,
+          where: 'id == ?', whereArgs: [expenceId]).then((_) {
+        _expences.removeWhere((element) => element.id == expenceId);
+        notifyListeners();
+
+        var existingCategory = findCategory(category);
+        //after we delete the expense, need to update the entries and totalamount
+
+        updateCategory(category, existingCategory.entries - 1,
+            existingCategory.totalAmount - amount);
+      });
+    });
+  }
 }
